@@ -5,8 +5,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 import Model.Cliente;
 
@@ -108,26 +106,6 @@ public class ClienteMysqlDAO extends MysqlBase {
             close();
         }
 
-    }
-
-    public static Cliente buscar(Cliente cliente) {
-    	open();
-        String sql = "SELECT * FROM Cliente WHERE id=?";
-        Cliente retorno = new Cliente();
-        try {
-            PreparedStatement stmt = conn.prepareStatement(sql);
-            stmt.setInt(1, retorno.get_id());
-            ResultSet resultado = stmt.executeQuery();
-            if (resultado.next()) {
-                retorno.set_id(resultado.getInt("id"));
-                retorno.setNome(resultado.getString("nome"));
-                retorno.setEndereco(resultado.getString("endereco"));
-                retorno.setTelefone(resultado.getString("telefone"));
-            }
-        } catch (SQLException ex) {
-            Logger.getLogger(ClienteMysqlDAO.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        return retorno;
     }
 
     public Cliente find(int pk) {

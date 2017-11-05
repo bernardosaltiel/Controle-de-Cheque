@@ -1,21 +1,30 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ListView?>
 <?import javafx.scene.control.ToolBar?>
 <?import javafx.scene.layout.BorderPane?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.ClienteController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.ClienteController">
    <top>
       <ToolBar prefHeight="40.0" prefWidth="200.0" BorderPane.alignment="CENTER">
         <items>
           <Button mnemonicParsing="false" onAction="#btNovoAction" text="Novo" />
-            <Button onAction="#btEditarAction" layoutX="10.0" layoutY="13.0" mnemonicParsing="false" text="Editar" />
-            <Button onAction="#btDeleteAction" layoutX="59.0" layoutY="13.0" mnemonicParsing="false" text="Apagar" />
+            <Button layoutX="10.0" layoutY="13.0" mnemonicParsing="false" onAction="#btEditarAction" text="Editar" />
+            <Button layoutX="59.0" layoutY="13.0" mnemonicParsing="false" onAction="#btDeleteAction" text="Apagar" />
         </items>
       </ToolBar>
    </top>
    <center>
-      <ListView fx:id="lvClientes" prefHeight="200.0" prefWidth="285.0" BorderPane.alignment="CENTER" />
+      <TableView fx:id="tvClientes" prefHeight="200.0" prefWidth="400.0" BorderPane.alignment="CENTER">
+        <columns>
+          <TableColumn fx:id="colNome" prefWidth="150.0" text="Nome" />
+            <TableColumn fx:id="colEnde" minWidth="0.0" prefWidth="284.0" text="Endereço" />
+            <TableColumn fx:id="colTelefone" minWidth="0.0" prefWidth="165.0" text="Telefone" />
+        </columns>
+      </TableView>
    </center>
 </BorderPane>

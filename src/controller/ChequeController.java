@@ -1,50 +1,113 @@
 package controller;
 
+import java.time.LocalDate;
+import java.time.Month;
+import java.time.format.DateTimeFormatter;
 import java.util.Optional;
 
 import Model.Cheque;
-import Model.mysql.ChequeMysqlDAO;
+import javafx.beans.property.SimpleDoubleProperty;
+import javafx.beans.property.SimpleIntegerProperty;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
-import javafx.scene.control.ListView;
+import javafx.scene.control.TableCell;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
+import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.paint.Color;
 
 public class ChequeController {
 
-	@FXML
-	protected ListView<Cheque> lvCheque;
+	    @FXML
+	    private TableView<Cheque> tvCheque;
 
+	    @FXML
+	    private TableColumn<Cheque, LocalDate> colData;
+	    @FXML
+	    private TableColumn<Cheque, Integer> colTitular;
+	    @FXML
+	    private TableColumn<Cheque, Integer> colnumero;
+	    @FXML
+	    private TableColumn<Cheque, Double> colValor;
+	    @FXML
+	    private TableColumn<Cheque, Integer> colRecebidoDe;
+	    @FXML
+	    private TableColumn<Cheque, String> ColDescricao;
+
+
+
+
+	    @FXML
+	    protected void personalizaColuna(TableColumn t){
+			DateTimeFormatter myDateFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+
+			// Custom rendering of the table cell.
+			t.setCellFactory(column -> {
+				return new TableCell<Cheque, LocalDate>() {
+					@Override
+					protected void updateItem(LocalDate item, boolean empty) {
+						super.updateItem(item, empty);
+
+						if (item == null || empty) {
+							setText(null);
+							setStyle("");
+						} else {
+							// Format date.
+							setText(myDateFormatter.format(item));
+
+							// Style all dates in March with a different color.
+							if (item.getMonth() == Month.MARCH) {
+								setTextFill(Color.CHOCOLATE);
+								setStyle("-fx-background-color: yellow");
+							} else {
+								setTextFill(Color.BLACK);
+								setStyle("");
+							}
+						}
+					}
+				};
+			});
+	    }
 	@FXML
 	protected void initialize() {
+		personalizaColuna(colData);
 		Main.addOnChangeScreenListener(new Main.OnChangeScreen() {
 			@Override
 			public void onScreenChanged(String newScreen, Object userData) {
-				if (newScreen.equals("listCheque"))
 					updateList();
 			}
 		});
+
+	    colnumero.setCellValueFactory(new PropertyValueFactory<>("Numero"));
+	    colRecebidoDe.setCellValueFactory(new PropertyValueFactory<>("Recebidode"));
+	    colValor.setCellValueFactory(new PropertyValueFactory<>("Valor"));
+	    ColDescricao.setCellValueFactory(new PropertyValueFactory<>("Descricao"));
+	    colTitular.setCellValueFactory(new PropertyValueFactory<>("Titular"));
+		colData.setCellValueFactory(new PropertyValueFactory<>("data"));
 
 		updateList();
 	}
 
 	@FXML
-	protected void btDeleteAction(ActionEvent e) {
-		ObservableList<Cheque> ol = lvCheque.getSelectionModel().getSelectedItems();
+	protected void btDeletarCheque(ActionEvent e) {
+		ObservableList<Cheque> ol = tvCheque.getSelectionModel().getSelectedItems();
 
 		if (!ol.isEmpty()) {
-			Cheque c = ol.get(0);
+			Cheque h = ol.get(0);
 
 			Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
 			alert.setTitle("Confirmação");
 			alert.setHeaderText("Deseja realmente excluir o Cheque?");
-			alert.setContentText(c.toString());
+			alert.setContentText(h.toString());
 
 			Optional<ButtonType> result = alert.showAndWait();
 
 			if (result.get() == ButtonType.OK) {
-				c.delete();
+				h.delete();
+				updateList();
 			}
 		} else {
 			Alert alert = new Alert(Alert.AlertType.INFORMATION);
@@ -57,27 +120,27 @@ public class ChequeController {
 	}
 
 	@FXML
-	protected void btEditarAction(ActionEvent e) {
+	protected void btEditarCheque(ActionEvent e) {
 
-		ObservableList<Cheque> ol = lvCheque.getSelectionModel().getSelectedItems();
+		ObservableList<Cheque> ol = tvCheque.getSelectionModel().getSelectedItems();
 
 		if (!ol.isEmpty()) {
-			Cheque c = ol.get(0);
+			Cheque h = ol.get(0);
 
-			Main.changeScreen("dadosCheque", c);
+			Main.changeScreen("chequecriar",h);
 		}
 
 	}
 
 	@FXML
-	protected void btNovoAction(ActionEvent e) {
-		Main.changeScreen("dadosCheque");
+	protected void btNovoCheque(ActionEvent e) {
+		Main.changeScreen("chequecriar");
 	}
 
 	private void updateList() {
-		lvCheque.getItems().clear();
-		for (Cheque c : Cheque.all()) {
-			lvCheque.getItems().add(c);
+		tvCheque.getItems().clear();
+		for (Cheque h : Cheque.all()) {
+			tvCheque.getItems().add(h);
 		}
 	}
 }
