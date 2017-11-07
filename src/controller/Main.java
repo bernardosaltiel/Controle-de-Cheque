@@ -2,12 +2,13 @@ package controller;
 
 import java.util.ArrayList;
 
+
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.stage.Stage;
-import javafx.stage.StageStyle;
 
 public class Main extends Application {
 	private static Stage stage;
@@ -17,6 +18,8 @@ public class Main extends Application {
 	private static Scene listScene;
 	private static Scene ApresentarCheque;
 	private static Scene ChequeCriar;
+	private static Scene StatusCriar;
+	private static Scene listStatus;
 
 	public static void main(String[] args) {
 		launch(args);
@@ -27,29 +30,46 @@ public class Main extends Application {
 		stage = primaryStage;
 		stage.setResizable(false);
 		primaryStage.setTitle("Controle de Cheque");
+		Image applicationIcon = new Image(getClass().getResourceAsStream("/imagens/Icon.png"));
+		primaryStage.getIcons().add(applicationIcon);
 
-		Parent FxmlPrincipal = FXMLLoader.load(getClass().getResource("../view/main.fxml"));
+
+		Parent FxmlPrincipal = FXMLLoader.load(getClass().getResource("/view/main.fxml"));
 		principal = new Scene(FxmlPrincipal, 640, 400);
 
-		Parent FxmlListCheque = FXMLLoader.load(getClass().getResource("../view/list_cheque.fxml"));
+		Parent FxmlStatusd = FXMLLoader.load(getClass().getResource("/view/dados_Status.fxml"));
+		StatusCriar = new Scene(FxmlStatusd, 640, 400);
+
+		Parent FxmlStatus = FXMLLoader.load(getClass().getResource("/view/list_Status.fxml"));
+		listStatus = new Scene(FxmlStatus, 640, 400);
+
+		Parent FxmlListCheque = FXMLLoader.load(getClass().getResource("/view/list_cheque.fxml"));
 		ApresentarCheque = new Scene(FxmlListCheque, 640, 400);
 
-		Parent FxmlCheque = FXMLLoader.load(getClass().getResource("../view/dados_cheque.fxml"));
+		Parent FxmlCheque = FXMLLoader.load(getClass().getResource("/view/dados_cheque.fxml"));
 		ChequeCriar = new Scene(FxmlCheque, 640, 400);
 
-		Parent FxmlCliente = FXMLLoader.load(getClass().getResource("../view/list_cliente.fxml"));
+		Parent FxmlCliente = FXMLLoader.load(getClass().getResource("/view/list_cliente.fxml"));
 		listScene = new Scene(FxmlCliente, 640, 400);
 
-		Parent FxmlDetails = FXMLLoader.load(getClass().getResource("../view/dados_clientes.fxml"));
+		Parent FxmlDetails = FXMLLoader.load(getClass().getResource("/view/dados_clientes.fxml"));
 		clienteScene = new Scene(FxmlDetails, 640, 400);
 
-		primaryStage.setScene(ApresentarCheque);
+		primaryStage.setScene(principal);
 		primaryStage.show();
 
 	}
 
 	public static void changeScreen(String scr, Object userData) {
 		switch (scr) {
+		case "listStatus":
+			stage.setScene(listStatus);
+			notifyAllListeners("listStatus", userData);
+			break;
+		case "dadosStatus":
+			stage.setScene(StatusCriar);
+			notifyAllListeners("dadosStatus", userData);
+			break;
 		case "principal":
 			stage.setScene(principal);
 			notifyAllListeners("principal", userData);

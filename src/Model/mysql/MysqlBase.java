@@ -11,7 +11,7 @@ public class MysqlBase {
     public static Connection open(){
 
         try {
-            conn = DriverManager.getConnection("jdbc:mysql://localhost/controlecheque?useSSL=false", "root","");
+            conn = DriverManager.getConnection("jdbc:mysql://mysql.mpiinformatica.com/mpiinformatica21?useSSL=false", "mpiinformatica21","mpi0055");
                 return conn;
         } catch (SQLException e) {
             e.printStackTrace();

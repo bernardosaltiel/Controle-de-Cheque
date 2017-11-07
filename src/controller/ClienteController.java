@@ -8,7 +8,6 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
-import javafx.scene.control.ListView;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -42,7 +41,10 @@ public class ClienteController {
         colEnde.setCellValueFactory(new PropertyValueFactory<>("Telefone"));
         updateList();
     }
-
+    @FXML
+    protected void btBackAction(ActionEvent e){
+    	Main.changeScreen("principal");
+    }
     @FXML
     protected void btDeleteAction(ActionEvent e){
         ObservableList<Cliente> ol = tvClientes.getSelectionModel().getSelectedItems();

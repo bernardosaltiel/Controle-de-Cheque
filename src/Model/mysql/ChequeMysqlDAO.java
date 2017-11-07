@@ -15,7 +15,7 @@ public class ChequeMysqlDAO extends MysqlBase {
 	public ChequeMysqlDAO() {
 		open();
 		try {
-			PreparedStatement smt = conn.prepareStatement("CREATE TABLE IF NOT EXISTS cheque("
+			PreparedStatement smt = conn.prepareStatement("CREATE TABLE IF NOT EXISTS Cheque("
 					+ "id INTEGER PRIMARY KEY AUTO_INCREMENT," + "numero INTEGER," + "valor DOUBLE," + "data DATE,"
 					+ "bomPara DATE," + "banco TEXT," + "agencia TEXT," + "conta TEXT," + "cdTitular INTEGER,"
 					+ "cdRecebidoDe INTEGER," + "descricao TEXT," + "recebidoEm DATE," + "repassadoEm DATE,"
@@ -37,7 +37,7 @@ public class ChequeMysqlDAO extends MysqlBase {
 		open();
 		try {
 			PreparedStatement smt = conn.prepareStatement(
-					"INSERT INTO cheque (numero,valor,data,bomPara,banco,agencia,conta,cdTitular,cdRecebidoDe,descricao,recebidoEm,repassadoEm,cdRepassadoPara,cdstatus) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
+					"INSERT INTO Cheque (numero,valor,data,bomPara,banco,agencia,conta,cdTitular,cdRecebidoDe,descricao,recebidoEm,repassadoEm,cdRepassadoPara,cdstatus) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
 			smt.setInt(1, c.getNumero());
 			smt.setDouble(2, c.getValor());
 			smt.setDate(3, Date.valueOf(c.getData()));

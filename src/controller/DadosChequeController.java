@@ -70,17 +70,17 @@ public class DadosChequeController {
 	}
 
 	@FXML
-	public void carregarStatusBox(ComboBox<Status> comb) {
+	public void carregarStatusBox() {
 		List<Status> listStatus;
 		ObservableList<Status> observableListStatus;
 		listStatus = StatusMysqlDAO.all();
 		observableListStatus = FXCollections.observableArrayList(listStatus);
-		comb.setItems(observableListStatus);
+		cbstatus.setItems(observableListStatus);
 	}
 
 	@FXML
 	protected void initialize() {
-		carregarStatusBox(cbstatus);
+		carregarStatusBox();
 		carregarClientesBox(cbtitular);
 		carregarClientesBox(cbrecebidode);
 		carregarClientesBox(cbrepassadopara);

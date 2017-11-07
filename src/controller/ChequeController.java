@@ -6,8 +6,6 @@ import java.time.format.DateTimeFormatter;
 import java.util.Optional;
 
 import Model.Cheque;
-import javafx.beans.property.SimpleDoubleProperty;
-import javafx.beans.property.SimpleIntegerProperty;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -90,6 +88,11 @@ public class ChequeController {
 
 		updateList();
 	}
+
+    @FXML
+    protected void btBackAction(ActionEvent e){
+    	Main.changeScreen("principal");
+    }
 
 	@FXML
 	protected void btDeletarCheque(ActionEvent e) {

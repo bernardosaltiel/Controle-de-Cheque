@@ -1,8 +1,47 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane xmlns:fx="http://javafx.com/fxml/1">
-	<!-- TODO Add Nodes -->
-</AnchorPane>
-
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.PrincipalController">
+   <children>
+      <MenuBar layoutY="2.0" prefHeight="25.0" prefWidth="600.0">
+        <menus>
+          <Menu mnemonicParsing="false" text="Cadastros">
+            <items>
+              <MenuItem mnemonicParsing="false" onAction="#CadClientes" text="Clientes" />
+                  <MenuItem mnemonicParsing="false" onAction="#CadStatus" text="Status" />
+            </items>
+          </Menu>
+            <Menu mnemonicParsing="false" text="Controle">
+               <items>
+                  <MenuItem mnemonicParsing="false" onAction="#cadCheque" text="Cheque" />
+               </items>
+            </Menu>
+            <Menu mnemonicParsing="false" text="Relatorio">
+               <items>
+                  <Menu mnemonicParsing="false" text="Clientes">
+                    <items>
+                      <MenuItem mnemonicParsing="false" text="Todos Clientes" />
+                    </items>
+                  </Menu>
+                  <Menu mnemonicParsing="false" text="Cheques">
+                    <items>
+                      <MenuItem mnemonicParsing="false" text="Todos Cheques" />
+                        <MenuItem mnemonicParsing="false" text="Cheque Por Stauts" />
+                        <MenuItem mnemonicParsing="false" text="Cheque Por Data" />
+                    </items>
+                  </Menu>
+               </items>
+            </Menu>
+            <Menu mnemonicParsing="false" text="Informações">
+               <items>
+                  <MenuItem mnemonicParsing="false" text="Sobre" />
+               </items>
+            </Menu>
+        </menus>
+      </MenuBar>
+   </children>
+</Pane>

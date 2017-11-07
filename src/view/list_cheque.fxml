@@ -30,4 +30,7 @@
               </columns>
       </TableView>
    </center>
+      <bottom>
+      <Button alignment="CENTER_RIGHT" mnemonicParsing="false" nodeOrientation="LEFT_TO_RIGHT" onAction="#btBackAction" text="Voltar Tela Principal" BorderPane.alignment="CENTER" />
+   </bottom>
 </BorderPane>
