@@ -71,11 +71,11 @@ public class Cliente{
     private static ClienteMysqlDAO dao = new ClienteMysqlDAO();
 
     public void save(){
-        if( _id != null && dao.find(_id)!= null)
-            dao.update(this);
-        else
+    	if( _id!=null && dao.find(_id) != null ){
+        	dao.update(this);
+        }else{
             dao.create(this);
-
+        }
     }
 
     public void delete(){

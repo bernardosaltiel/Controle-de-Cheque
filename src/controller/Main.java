@@ -15,11 +15,12 @@ public class Main extends Application {
 
 	private static Scene clienteScene;
 	private static Scene principal;
+	private static Scene StatusCriar;
+	private static Scene listStatus;
 	private static Scene listScene;
 	private static Scene ApresentarCheque;
 	private static Scene ChequeCriar;
-	private static Scene StatusCriar;
-	private static Scene listStatus;
+
 
 	public static void main(String[] args) {
 		launch(args);

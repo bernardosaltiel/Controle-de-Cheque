@@ -60,6 +60,9 @@ public class DadosChequeController {
 	@FXML
 	private TextField tfdescricao;
 
+
+
+
 	@FXML
 	public void carregarClientesBox(ComboBox<Cliente> combo) {
 		List<Cliente> listClientes;

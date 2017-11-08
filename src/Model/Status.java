@@ -12,13 +12,16 @@ public class Status {
     public Status(){
     }
 
-    public Status(String nome) {
+    public Status(Integer _id) {
+		this._id = _id;
+	}
+
+	public Status(String nome) {
 		super();
 		this.nome = nome;
 	}
 
 	public Status(Integer _id, String nome) {
-		super();
 		this._id = _id;
 		this.nome = nome;
 	}
@@ -48,11 +51,11 @@ public class Status {
     private static StatusMysqlDAO dao = new StatusMysqlDAO();
 
     public void save(){
-        if( _id != null && dao.find(_id)!= null)
+    	if( _id!=null && dao.find(_id) != null ){
             dao.update(this);
-        else
+    	}else{
             dao.create(this);
-
+    	}
     }
 
     public void delete(){

@@ -250,10 +250,11 @@ public class Cheque {
     private static ChequeMysqlDAO dao = new ChequeMysqlDAO();
 
     public void save(){
-        if( _id!=null && dao.find(_id) != null )
+    	if( _id!=null && dao.find(_id) != null ){
             dao.update(this);
-        else
+        }else{
             dao.create(this);
+        }
     }
 
 
