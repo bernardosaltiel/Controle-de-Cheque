@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import Model.Cliente;
+import javafx.scene.control.Alert;
 
 public class ClienteMysqlDAO extends MysqlBase {
 
@@ -15,10 +16,10 @@ public class ClienteMysqlDAO extends MysqlBase {
         open();
         try {
             PreparedStatement smt = conn.prepareStatement("CREATE TABLE IF NOT EXISTS Cliente("+
-                    "id INTEGER PRIMARY KEY AUTO_INCREMENT,"+
+                    "id INTEGER AUTO_INCREMENT,"+
                     "nome TEXT,"+
                     "endereco TEXT,"+
-                    "telefone TEXT);");
+                    "telefone TEXT,"+ "CONSTRAINT pk_Cliente PRIMARY KEY(id));");
             int i = smt.executeUpdate();
             System.out.println(i);
         } catch (SQLException e) {
@@ -101,8 +102,12 @@ public class ClienteMysqlDAO extends MysqlBase {
             smt.setInt(1,c.get_id());
             smt.executeUpdate();
         } catch (SQLException e) {
-            e.printStackTrace();
-        }   finally {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Informação");
+            alert.setHeaderText("Vôce Não Pode Fazer Isso.");
+            alert.setContentText("Existe Algum Cheque Cadastrado com esse Cliente");
+            alert.showAndWait();
+        }finally {
             close();
         }
 

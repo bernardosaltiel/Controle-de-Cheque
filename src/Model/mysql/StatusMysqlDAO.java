@@ -9,6 +9,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import Model.Status;
+import javafx.scene.control.Alert;
 
 public class StatusMysqlDAO extends MysqlBase {
 
@@ -17,8 +18,8 @@ public class StatusMysqlDAO extends MysqlBase {
         open();
         try {
             PreparedStatement smt = conn.prepareStatement("CREATE TABLE IF NOT EXISTS Status("+
-                    "id INTEGER PRIMARY KEY AUTO_INCREMENT,"+
-                    "nome TEXT);");
+                    "id INTEGER AUTO_INCREMENT,"+
+                "nome TEXT,"+ "CONSTRAINT pk_Status PRIMARY KEY(id) );");
             int i = smt.executeUpdate();
             System.out.println(i);
         } catch (SQLException e) {
@@ -113,7 +114,11 @@ public class StatusMysqlDAO extends MysqlBase {
             smt.setInt(1,s.get_id());
             smt.executeUpdate();
         } catch (SQLException e) {
-            e.printStackTrace();
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Informação");
+            alert.setHeaderText("Vôce Não Pode Fazer Isso.");
+            alert.setContentText("Existe Algum Cheque Cadastrado com esse Status");
+            alert.showAndWait();
         }   finally {
             close();
         }

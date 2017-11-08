@@ -19,10 +19,10 @@ public class ChequeMysqlDAO extends MysqlBase {
 					+ "id INTEGER PRIMARY KEY AUTO_INCREMENT," + "numero INTEGER," + "valor DOUBLE," + "data DATE,"
 					+ "bomPara DATE," + "banco TEXT," + "agencia TEXT," + "conta TEXT," + "cdTitular INTEGER,"
 					+ "cdRecebidoDe INTEGER," + "descricao TEXT," + "recebidoEm DATE," + "repassadoEm DATE,"
-					+ "cdRepassadoPara INTEGER," + "cdstatus INTEGER," + "FOREIGN KEY(cdRecebidoDe)"
-					+ "REFERENCES Cliente(cdRecebidoDe)," + "FOREIGN KEY(cdTitular)" + "REFERENCES Cliente(cdTitular),"
-					+ "FOREIGN KEY(cdRepassadoPara)" + "REFERENCES Cliente(cdRepassadoPara)," + "FOREIGN KEY(cdstatus)"
-					+ "REFERENCES Status(cdstatus));");
+					+ "cdRepassadoPara INTEGER," + "cdstatus INTEGER," + "constraint fk_Cheque_Cliente " + "FOREIGN KEY(cdRecebidoDe)"
+					+ "REFERENCES Cliente(id)," + "FOREIGN KEY(cdTitular)" + "REFERENCES Cliente(id),"
+					+ "FOREIGN KEY(cdRepassadoPara)" + "REFERENCES Cliente(id)," + "constraint fk_Cheque_Status " + "FOREIGN KEY(cdstatus)"
+					+ "REFERENCES Status(id));");
 			int i = smt.executeUpdate();
 			System.out.println(i);
 		} catch (SQLException e) {

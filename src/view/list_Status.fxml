@@ -15,6 +15,7 @@
         <items>
           <Button mnemonicParsing="false" onAction="#btNovoAction" text="Novo" />
             <Button layoutX="10.0" layoutY="13.0" mnemonicParsing="false" onAction="#btEditarAction" text="Editar" />
+            <Button layoutX="59.0" layoutY="13.0" mnemonicParsing="false" onAction="#btDeleteAction" text="Apagar" />
         </items>
       </ToolBar>
    </top>
