@@ -24,7 +24,7 @@
                <items>
                   <Menu mnemonicParsing="false" text="Clientes">
                     <items>
-                      <MenuItem mnemonicParsing="false" text="Todos Clientes" />
+                      <MenuItem mnemonicParsing="false" onAction="#relTotalClientes" text="Todos Clientes" />
                     </items>
                   </Menu>
                   <Menu mnemonicParsing="false" text="Cheques">

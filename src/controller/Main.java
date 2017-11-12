@@ -31,7 +31,7 @@ public class Main extends Application {
 		stage = primaryStage;
 		stage.setResizable(false);
 		primaryStage.setTitle("Controle de Cheque");
-		Image applicationIcon = new Image(getClass().getResourceAsStream("/imagens/Icon.png"));
+		Image applicationIcon = new Image(getClass().getResourceAsStream("../imagens/Icon.png"));
 		primaryStage.getIcons().add(applicationIcon);
 
 

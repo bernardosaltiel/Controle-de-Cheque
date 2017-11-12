@@ -1,12 +1,12 @@
 package controller;
 
+import java.net.URL;
 import java.util.Optional;
-
-import com.sun.media.jfxmediaimpl.platform.Platform;
 
 import Model.Status;
 import Model.mysql.ChequeMysqlDAO;
 import Model.mysql.ClienteMysqlDAO;
+import Model.mysql.MysqlBase;
 import Model.mysql.StatusMysqlDAO;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -16,7 +16,12 @@ import javafx.scene.control.ButtonType;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Dialog;
 import javafx.scene.control.DialogPane;
-import javafx.scene.layout.VBox;
+import net.sf.jasperreports.engine.JRException;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.JasperReport;
+import net.sf.jasperreports.engine.util.JRLoader;
+import net.sf.jasperreports.view.JasperViewer;
 
 public class PrincipalController {
 
@@ -38,6 +43,17 @@ public class PrincipalController {
     @FXML
     protected void cadCheque(ActionEvent e ){
     	Main.changeScreen("apresentarcheque");
+    }
+    @FXML
+    protected void relTotalClientes(ActionEvent e) throws JRException{
+            URL url = getClass().getResource("/relatorios/relTotalClientes.jasper");
+            JasperReport jasperReport = (JasperReport) JRLoader.loadObject(url);
+
+            JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, null, MysqlBase.open());//null: caso não existam filtros
+            JasperViewer jasperViewer = new JasperViewer(jasperPrint, false);//false: não deixa fechar a aplicação principal
+            jasperViewer.setExtendedState(JasperViewer.MAXIMIZED_BOTH);
+            jasperViewer.setVisible(true);
+
     }
     @FXML
     protected void relStatus(ActionEvent e ){
