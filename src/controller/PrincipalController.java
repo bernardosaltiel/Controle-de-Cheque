@@ -1,8 +1,15 @@
 package controller;
 
 import java.net.URL;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 import java.util.Optional;
 
+import Model.Cheque;
 import Model.Status;
 import Model.mysql.ChequeMysqlDAO;
 import Model.mysql.ClienteMysqlDAO;
@@ -13,10 +20,12 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.ButtonType;
+import javafx.scene.control.ChoiceDialog;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Dialog;
 import javafx.scene.control.DialogPane;
 import net.sf.jasperreports.engine.JRException;
+import net.sf.jasperreports.engine.JRResultSetDataSource;
 import net.sf.jasperreports.engine.JasperFillManager;
 import net.sf.jasperreports.engine.JasperPrint;
 import net.sf.jasperreports.engine.JasperReport;
@@ -46,6 +55,7 @@ public class PrincipalController {
     }
     @FXML
     protected void relTotalCheque(ActionEvent e) throws JRException{
+
             URL url = getClass().getResource("/relatorios/relTotalCheque.jasper");
             JasperReport jasperReport = (JasperReport) JRLoader.loadObject(url);
 
@@ -67,28 +77,37 @@ public class PrincipalController {
 
     }
     @FXML
-    protected void relStatus(ActionEvent e ){
-        Dialog<Status> dialog = new Dialog<>();
-        dialog.setTitle("Relatorio por Status");
+    protected void relStatus(ActionEvent e ) throws JRException{
+    	ObservableList<Status> options = FXCollections.observableArrayList(Status.all());
+    	ChoiceDialog<Status> dialog = new ChoiceDialog<Status>(null, options);
+    	dialog.setTitle("Relatorio por Status");
         dialog.setHeaderText("Escolha o Status para ter o relatorio");
-        DialogPane dialogPane = dialog.getDialogPane();
-        dialogPane.setPrefHeight(250);
-        dialogPane.getButtonTypes().addAll(ButtonType.OK, ButtonType.CANCEL);
-        ObservableList<Status> options = FXCollections.observableArrayList(Status.all());
-        ComboBox<Status> comboBox = new ComboBox<>(options);
-        comboBox.setPrefHeight(40.0);
-        comboBox.getSelectionModel().selectFirst();
-        dialogPane.setContent(comboBox);
+        dialog.setContentText("Status:");
+        dialog.dialogPaneProperty();
         dialog.setResultConverter((ButtonType button) -> {
             if (button == ButtonType.OK) {
-                return new Status(comboBox.getValue().get_id());
+
+            	try{
+            	Connection conn = MysqlBase.open();
+            	PreparedStatement smt = conn.prepareStatement("SELECT * FROM Cheque t, Cliente rec, Cliente pas, Cliente tit, Status s WHERE t.cdTitular = rec.id AND t.cdRecebidoDe = pas.id AND t.cdRepassadoPara = tit.id AND t.cdstatus = s.id AND t.cdstatus = ?");
+            	smt.setInt(1,dialog.getSelectedItem().get_id());
+            	smt.executeQuery();
+        		JRResultSetDataSource jrs= new JRResultSetDataSource(smt.getResultSet());
+                URL url = getClass().getResource("/relatorios/relTotalCheque.jasper");
+                JasperReport jasperReport = (JasperReport) JRLoader.loadObject(url);
+
+                JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, new HashMap(), jrs);//null: caso não existam filtros
+                JasperViewer jasperViewer = new JasperViewer(jasperPrint, false);//false: não deixa fechar a aplicação principal
+                jasperViewer.setExtendedState(JasperViewer.MAXIMIZED_BOTH);
+                jasperViewer.setVisible(true);
+            	}catch(SQLException e2){
+            		e2.printStackTrace();
+            	} catch (JRException e1) {
+					e1.printStackTrace();
+				}
             }
             return null;
         });
         Optional<Status> optionalResult = dialog.showAndWait();
-        optionalResult.ifPresent((Status results) -> {
-            System.out.println(
-                results.get_id());
-        });
     }
 }
