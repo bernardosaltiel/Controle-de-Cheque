@@ -31,8 +31,8 @@ public class Main extends Application {
 		stage = primaryStage;
 		stage.setResizable(false);
 		primaryStage.setTitle("Controle de Cheque");
-		Image applicationIcon = new Image(getClass().getResourceAsStream("../imagens/Icon.png"));
-		primaryStage.getIcons().add(applicationIcon);
+		primaryStage.getIcons().add(new Image("file:C:/imagens/Icon.png"));
+
 
 
 		Parent FxmlPrincipal = FXMLLoader.load(getClass().getResource("/view/main.fxml"));

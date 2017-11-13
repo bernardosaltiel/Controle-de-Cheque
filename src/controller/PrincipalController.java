@@ -45,6 +45,17 @@ public class PrincipalController {
     	Main.changeScreen("apresentarcheque");
     }
     @FXML
+    protected void relTotalCheque(ActionEvent e) throws JRException{
+            URL url = getClass().getResource("/relatorios/relTotalCheque.jasper");
+            JasperReport jasperReport = (JasperReport) JRLoader.loadObject(url);
+
+            JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, null, MysqlBase.open());//null: caso não existam filtros
+            JasperViewer jasperViewer = new JasperViewer(jasperPrint, false);//false: não deixa fechar a aplicação principal
+            jasperViewer.setExtendedState(JasperViewer.MAXIMIZED_BOTH);
+            jasperViewer.setVisible(true);
+
+    }
+    @FXML
     protected void relTotalClientes(ActionEvent e) throws JRException{
             URL url = getClass().getResource("/relatorios/relTotalClientes.jasper");
             JasperReport jasperReport = (JasperReport) JRLoader.loadObject(url);
