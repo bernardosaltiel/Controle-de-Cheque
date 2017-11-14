@@ -4,12 +4,9 @@ import java.net.URL;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Optional;
 
-import Model.Cheque;
 import Model.Status;
 import Model.mysql.ChequeMysqlDAO;
 import Model.mysql.ClienteMysqlDAO;
@@ -21,9 +18,6 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.ChoiceDialog;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.Dialog;
-import javafx.scene.control.DialogPane;
 import net.sf.jasperreports.engine.JRException;
 import net.sf.jasperreports.engine.JRResultSetDataSource;
 import net.sf.jasperreports.engine.JasperFillManager;
@@ -55,26 +49,21 @@ public class PrincipalController {
     }
     @FXML
     protected void relTotalCheque(ActionEvent e) throws JRException{
-
-            URL url = getClass().getResource("/relatorios/relTotalCheque.jasper");
+    		URL url = getClass().getResource("/Relatorios/relTotalCheque.jasper");
             JasperReport jasperReport = (JasperReport) JRLoader.loadObject(url);
-
             JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, null, MysqlBase.open());//null: caso não existam filtros
             JasperViewer jasperViewer = new JasperViewer(jasperPrint, false);//false: não deixa fechar a aplicação principal
             jasperViewer.setExtendedState(JasperViewer.MAXIMIZED_BOTH);
             jasperViewer.setVisible(true);
-
     }
     @FXML
     protected void relTotalClientes(ActionEvent e) throws JRException{
-            URL url = getClass().getResource("/relatorios/relTotalClientes.jasper");
+            URL url = getClass().getResource("/Relatorios/relTotalClientes.jasper");
             JasperReport jasperReport = (JasperReport) JRLoader.loadObject(url);
-
             JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, null, MysqlBase.open());//null: caso não existam filtros
             JasperViewer jasperViewer = new JasperViewer(jasperPrint, false);//false: não deixa fechar a aplicação principal
             jasperViewer.setExtendedState(JasperViewer.MAXIMIZED_BOTH);
             jasperViewer.setVisible(true);
-
     }
     @FXML
     protected void relStatus(ActionEvent e ) throws JRException{
@@ -93,7 +82,7 @@ public class PrincipalController {
             	smt.setInt(1,dialog.getSelectedItem().get_id());
             	smt.executeQuery();
         		JRResultSetDataSource jrs= new JRResultSetDataSource(smt.getResultSet());
-                URL url = getClass().getResource("/relatorios/relTotalCheque.jasper");
+                URL url = getClass().getResource("/Relatorios/relTotalCheque.jasper");
                 JasperReport jasperReport = (JasperReport) JRLoader.loadObject(url);
 
                 JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, new HashMap(), jrs);//null: caso não existam filtros
@@ -109,5 +98,9 @@ public class PrincipalController {
             return null;
         });
         Optional<Status> optionalResult = dialog.showAndWait();
+    }
+    @FXML
+    protected void relData(ActionEvent e){
+
     }
 }

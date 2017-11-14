@@ -83,16 +83,16 @@ public class DadosChequeController {
 
 	@FXML
 	protected void initialize() {
-		carregarStatusBox();
-		carregarClientesBox(cbtitular);
-		carregarClientesBox(cbrecebidode);
-		carregarClientesBox(cbrepassadopara);
-		tfvalor.setMask("N!.N!");
-		tfnumero.setMask("NNNNNNNN");
 		Main.addOnChangeScreenListener(new Main.OnChangeScreen() {
 			@Override
 			public void onScreenChanged(String newScreen, Object userData) {
 				if (newScreen.equals("chequecriar")) {
+					carregarStatusBox();
+					carregarClientesBox(cbtitular);
+					carregarClientesBox(cbrecebidode);
+					carregarClientesBox(cbrepassadopara);
+					tfvalor.setMask("N!.N!");
+					tfnumero.setMask("NNNNNNNN");
 					if (userData != null) {
 						ChequeAtual = (Cheque) userData;
 						tfnumero.setText(String.valueOf((ChequeAtual.getNumero())));
