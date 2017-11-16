@@ -4,6 +4,7 @@ import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Types;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -49,8 +50,16 @@ public class ChequeMysqlDAO extends MysqlBase {
 			smt.setInt(9, c.getRecebidode().get_id());
 			smt.setString(10, c.getDescricao());
 			smt.setDate(11, Date.valueOf(c.getRecebidoEm()));
+			if (c.getRepassadoEm() == null){
+			smt.setNull(12, Types.DATE);
+			}else{
 			smt.setDate(12, Date.valueOf(c.getRepassadoEm()));
+			}
+			if (c.getRepassadoPara() == null){
+			smt.setNull(13, Types.INTEGER);
+			}else{
 			smt.setInt(13, c.getRepassadoPara().get_id());
+			}
 			smt.setInt(14, c.getStatus().get_id());
 			smt.executeUpdate();
 		} catch (SQLException e) {

@@ -1,6 +1,10 @@
 package controller;
 
+import java.sql.SQLException;
 import java.util.List;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
 
 import Model.Cheque;
 import Model.Cliente;
@@ -18,6 +22,7 @@ import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
 
 public class DadosChequeController {
+
 	private Cheque ChequeAtual;
 	@FXML
 	private DatePicker dtrecebidoem;
@@ -59,9 +64,6 @@ public class DadosChequeController {
 
 	@FXML
 	private TextField tfdescricao;
-
-
-
 
 	@FXML
 	public void carregarClientesBox(ComboBox<Cliente> combo) {
@@ -153,9 +155,6 @@ public class DadosChequeController {
 				throw new RuntimeException("O atributo Agencia não pode ser vazio");
 			if (tfdescricao.getText().isEmpty())
 				throw new RuntimeException("O atributo Descrição não pode ser vazio");
-			if (cbrepassadopara.getSelectionModel().getSelectedItem() == null) {
-				throw new RuntimeException("O atributo RepassadoPara não pode ser vazio");
-			}
 			if (cbrecebidode.getSelectionModel().getSelectedItem() == null) {
 				throw new RuntimeException("O atributo Recebido de  não pode ser vazio");
 			}
@@ -173,9 +172,6 @@ public class DadosChequeController {
 			}
 			if (dtbomPara.getValue() == null) {
 				throw new RuntimeException("O atributo Bom Para Em não pode ser vazio");
-			}
-			if (dtrepassadoem.getValue() == null) {
-				throw new RuntimeException("O atributo Repassado Em Em não pode ser vazio");
 			}
 			if (ChequeAtual != null) {
 				ChequeAtual.setNumero(Integer.parseInt(tfnumero.getText()));
