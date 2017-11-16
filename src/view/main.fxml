@@ -31,14 +31,9 @@
                     <items>
                       <MenuItem mnemonicParsing="false" onAction="#relTotalCheque" text="Todos Cheques" />
                         <MenuItem mnemonicParsing="false" onAction="#relStatus" text="Cheque Por Stauts" />
-                        <MenuItem mnemonicParsing="false" text="Cheque Por Data" />
+                        <MenuItem mnemonicParsing="false" onAction="#relData" text="Cheque Por Data" />
                     </items>
                   </Menu>
-               </items>
-            </Menu>
-            <Menu mnemonicParsing="false" text="Informações">
-               <items>
-                  <MenuItem mnemonicParsing="false" text="Sobre" />
                </items>
             </Menu>
         </menus>

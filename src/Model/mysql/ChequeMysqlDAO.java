@@ -86,7 +86,11 @@ public class ChequeMysqlDAO extends MysqlBase {
 						rs.getString("conta"), rs.getDate("data").toLocalDate(), rs.getString("banco"), Titular,
 						Recebidode, RepassadoPara, status);
 				Cheque.setBomPara(rs.getDate("bomPara").toLocalDate());
+				if(rs.getDate("repassadoEm")!= null){
 				Cheque.setRepassadoEm(rs.getDate("repassadoEm").toLocalDate());
+				}else{
+					Cheque.setRepassadoEm(null);
+				}
 				Cheque.setRecebidoEm(rs.getDate("recebidoEm").toLocalDate());
 				Cheque.setDescricao(rs.getString("descricao"));
 				Cheque.set_id(rs.getInt("id"));

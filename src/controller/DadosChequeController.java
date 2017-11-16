@@ -1,10 +1,6 @@
 package controller;
 
-import java.sql.SQLException;
 import java.util.List;
-import java.util.concurrent.Executors;
-import java.util.concurrent.ScheduledExecutorService;
-import java.util.concurrent.TimeUnit;
 
 import Model.Cheque;
 import Model.Cliente;
