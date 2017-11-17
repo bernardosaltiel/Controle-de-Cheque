@@ -99,7 +99,7 @@ public class PrincipalController {
 
             	try{
             	Connection conn = MysqlBase.open();
-            	PreparedStatement smt = conn.prepareStatement("SELECT * FROM Cheque t, Cliente rec, Cliente pas, Cliente tit, Status s WHERE t.cdTitular = rec.id AND t.cdRecebidoDe = pas.id AND t.cdRepassadoPara = tit.id AND t.cdstatus = s.id AND t.cdstatus = ?");
+            	PreparedStatement smt = conn.prepareStatement("SELECT * FROM Cheque t LEFT JOIN Cliente rec ON t.cdRecebidoDe = rec.id LEFT JOIN Cliente pas ON t.cdTitular = pas.id LEFT JOIN Cliente tit ON t.cdRepassadoPara = tit.id LEFT JOIN Status s ON t.cdstatus = s.id WHERE t.cdstatus = ?");
             	smt.setInt(1,dialog.getSelectedItem().get_id());
             	smt.executeQuery();
         		JRResultSetDataSource jrs= new JRResultSetDataSource(smt.getResultSet());
@@ -145,7 +145,7 @@ public class PrincipalController {
 				throw new RuntimeException("O atributo Data Final não pode ser vazio");
 			}
         	Connection conn = MysqlBase.open();
-        	PreparedStatement smt = conn.prepareStatement("SELECT * FROM Cheque t, Cliente rec, Cliente pas, Cliente tit, Status s WHERE t.cdTitular = rec.id AND t.cdRecebidoDe = pas.id AND t.cdRepassadoPara = tit.id AND t.cdstatus = s.id AND t.data BETWEEN ? AND ?");
+        	PreparedStatement smt = conn.prepareStatement("SELECT * FROM Cheque t LEFT JOIN Cliente rec ON t.cdRecebidoDe = rec.id LEFT JOIN Cliente pas ON t.cdTitular = pas.id LEFT JOIN Cliente tit ON t.cdRepassadoPara = tit.id LEFT JOIN Status s ON t.cdstatus = s.id WHERE t.data BETWEEN ? AND ?");
         	smt.setDate(1,Date.valueOf(dateInicio.getValue()));
         	smt.setDate(2,Date.valueOf(dateFinal.getValue()));
         	smt.executeQuery();
