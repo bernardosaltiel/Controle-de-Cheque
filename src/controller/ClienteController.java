@@ -37,8 +37,8 @@ public class ClienteController {
             }
         });
         colNome.setCellValueFactory(new PropertyValueFactory<>("Nome"));
-        colTelefone.setCellValueFactory(new PropertyValueFactory<>("Endereco"));
-        colEnde.setCellValueFactory(new PropertyValueFactory<>("Telefone"));
+        colEnde.setCellValueFactory(new PropertyValueFactory<>("Endereco"));
+        colTelefone.setCellValueFactory(new PropertyValueFactory<>("Telefone"));
         updateList();
     }
     @FXML

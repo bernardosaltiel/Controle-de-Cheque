@@ -2,6 +2,17 @@
 <classpath>
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="lib" path="C:/Users/HyperX/git/lib/apache.commons/commons-beanutils-1.8.3.jar"/>
+	<classpathentry kind="lib" path="C:/Users/HyperX/git/lib/apache.commons/commons-collections-3.2.1.jar"/>
+	<classpathentry kind="lib" path="C:/Users/HyperX/git/lib/apache.commons/commons-digester-1.8.jar"/>
+	<classpathentry kind="lib" path="C:/Users/HyperX/git/lib/apache.commons/commons-logging-1.1.1.jar"/>
+	<classpathentry kind="lib" path="C:/Users/HyperX/git/lib/jasper.reports/asm-3.2.jar"/>
+	<classpathentry kind="lib" path="C:/Users/HyperX/git/lib/jasper.reports/groovy-1.7.2.jar"/>
+	<classpathentry kind="lib" path="C:/Users/HyperX/git/lib/jasper.reports/iText-2.1.7.jar"/>
+	<classpathentry kind="lib" path="C:/Users/HyperX/git/lib/jasper.reports/jasperreports-6.3.1.jar"/>
+	<classpathentry kind="lib" path="C:/Users/HyperX/git/lib/jasper.reports/jasperreports-fonts-6.3.1.jar"/>
+	<classpathentry kind="lib" path="C:/Users/HyperX/git/lib/jasper.reports/jasperreports-javaflow-6.3.1.jar"/>
+	<classpathentry kind="lib" path="C:/Users/HyperX/git/lib/jasper.reports/poi-3.6-20091214.jar"/>
 	<classpathentry kind="lib" path="C:/Users/HyperX/git/Controle-de-Cheque/src/mysql-connector-java-5.1.44-bin.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

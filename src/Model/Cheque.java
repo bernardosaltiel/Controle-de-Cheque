@@ -249,14 +249,14 @@ public class Cheque {
     //----------- DAO
     private static ChequeMysqlDAO dao = new ChequeMysqlDAO();
 
-    public void save(){
-    	if( _id!=null && dao.find(_id) != null ){
-            dao.update(this);
-        }else{
-            dao.create(this);
-        }
-    }
-
+	public void save() {
+		if (_id != null) {
+			dao.find(_id);
+			dao.update(this);
+		} else {
+			dao.create(this);
+		}
+	}
 
     public void delete(){
         if( dao.find(_id)!= null)
